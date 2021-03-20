@@ -6,7 +6,7 @@ CREATE TABLE public.asset (
     id varchar(64) NOT NULL ,
     "name" varchar(20) NOT NULL,
     "code" varchar(20) NOT NULL,
-    price varchar NOT NULL DEFAULT 0,
+    price bigint  NOT NULL DEFAULT 0,
     "description" varchar(100) NOT NULL,
     created_date timestamp(0) NULL DEFAULT timezone('UTC'::text, now()),
     updated_date timestamp(0) NULL,
