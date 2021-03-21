@@ -1,16 +1,18 @@
 package com.portfoliotracker.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebConfig implements WebMvcConfigurer{
-	
+@EnableWebMvc
+public class WebConfig implements WebMvcConfigurer {
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// Access static resource:
-		//Ex: http://domain/js/
+		// Ex: http://domain/js/
 		registry.addResourceHandler("/js/**") //
 				.addResourceLocations("classpath:/static/js/");
 
@@ -23,7 +25,7 @@ public class WebConfig implements WebMvcConfigurer{
 				.addResourceLocations("classpath:/static/img/");
 
 		// vendor
-		registry.addResourceHandler("/plugins/**") //
+		registry.addResourceHandler("/vendor/**") //
 				.addResourceLocations("classpath:/static/vendor/");
 
 	}
