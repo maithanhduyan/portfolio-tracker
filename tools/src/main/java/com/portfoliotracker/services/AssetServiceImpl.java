@@ -19,4 +19,9 @@ public class AssetServiceImpl implements AssetService {
 		return assetRepository.findAll();
 	}
 
+	@Override
+	public Asset saveAsset(Asset asset) {
+		return assetRepository.save(asset);
+	}
+
 }

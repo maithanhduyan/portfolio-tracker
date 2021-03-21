@@ -9,4 +9,5 @@ import com.portfoliotracker.entities.Asset;
 @Service
 public interface AssetService {
 	public List<Asset> findList();
+	public Asset saveAsset(Asset asset);
 }

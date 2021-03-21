@@ -24,8 +24,12 @@ public class Asset implements Serializable {
 	private String id;
 	@Column(name = "name")
 	private String name;
+	@Column(name = "code")
+	private String code;
 	@Column(name = "price")
 	private double price;
+	@Column(name = "description")
+	private String description;
 	@Column(name = "created_date")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
@@ -62,6 +66,14 @@ public class Asset implements Serializable {
 		this.name = name;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public double getPrice() {
 		return price;
 	}
@@ -86,10 +98,18 @@ public class Asset implements Serializable {
 		this.updatedDate = updatedDate;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public String toString() {
-		return "Asset [id=" + id + ", name=" + name + ", price=" + price + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + "]";
+		return "Asset [id=" + id + ", name=" + name + ", code=" + code + ", price=" + price + ", description="
+				+ description + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
 	}
 
 }
