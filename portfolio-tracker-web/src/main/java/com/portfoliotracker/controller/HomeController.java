@@ -10,4 +10,12 @@ public class HomeController {
 	public String homePage() {
 		return "index";
 	}
+	@RequestMapping("/500")
+	public String _500Page() {
+		return "500";
+	}
+	@RequestMapping("/404")
+	public String _404Page() {
+		return "404";
+	}
 }

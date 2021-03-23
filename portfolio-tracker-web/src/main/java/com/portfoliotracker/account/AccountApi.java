@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.portfoliotracker.shared.id.UUIDService;
+import com.portfoliotracker.shared.id.IDService;
 
 @RestController
 @RequestMapping("/api/account")
@@ -22,7 +22,7 @@ public class AccountApi {
 	private AccountService accountService;
 	
 	@Autowired
-	private UUIDService uuidService;
+	private IDService uuidService;
 
 	public AccountApi() {
 	}
@@ -30,7 +30,7 @@ public class AccountApi {
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public Account login(@RequestParam("username") String username, @RequestParam("password") String password) {
-		LOG.info(username + " " + password + uuidService.createUID());
+		LOG.info(username + " " + password + uuidService.createUUID());
 		Account account = null;
 		try {
 			account = accountService.findByUsername(username);

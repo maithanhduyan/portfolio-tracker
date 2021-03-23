@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.portfoliotracker.ui.AssetFrame;
 import com.portfoliotracker.ui.Window;
 
 /**
@@ -17,12 +18,13 @@ import com.portfoliotracker.ui.Window;
 public class AppCommandLineRunner implements CommandLineRunner {
 
 	private Window window;
-	public static Dimension dim;
+	
+	public static  Dimension dim;
 
 	@Autowired
-	public AppCommandLineRunner(Window window) {
+	public AppCommandLineRunner(Window window,AssetFrame assetFrame) {
 		this.window = window;
-		this.dim = Toolkit.getDefaultToolkit().getScreenSize();
+		AppCommandLineRunner.dim = Toolkit.getDefaultToolkit().getScreenSize();
 
 	}
 

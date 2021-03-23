@@ -10,4 +10,9 @@ public class AssetController {
 	public String assestPage() {
 		return "asset/asset";
 	}
+
+	@RequestMapping("/portfolio")
+	public String portfolioPage() {
+		return "portfolio/index";
+	}
 }

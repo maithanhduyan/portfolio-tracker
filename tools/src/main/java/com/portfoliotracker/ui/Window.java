@@ -1,5 +1,6 @@
 package com.portfoliotracker.ui;
 
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,15 +24,19 @@ import org.springframework.stereotype.Controller;
 
 import com.portfoliotracker.entities.Asset;
 import com.portfoliotracker.services.AssetService;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @Controller
 public class Window extends JFrame {
-
 	@Autowired
 	AssetService assetService;
 
 	String[] args;
-
+	private AssetFrame assetFrame;
 	private static final long serialVersionUID = -2668676026223241027L;
 	private static final Logger log = LoggerFactory.getLogger(Window.class);
 	private JTextField txtAssetName;
@@ -44,12 +49,15 @@ public class Window extends JFrame {
 	private JLabel lblAssetCode;
 	private JButton btnAdd;
 	private DefaultTableModel mTableModel;
+	private JMenu mnAsset;
+	private JMenuItem mnitemAssetList;
 
 	/**
 	 * Create the frame.
 	 */
 	@Autowired
-	public Window() {
+	public Window(AssetFrame assetFrame) {
+		this.assetFrame = assetFrame;
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
@@ -124,6 +132,22 @@ public class Window extends JFrame {
 		table = new JTable(mTableModel);
 		table.setBounds(40, 158, 500, 179);
 		getContentPane().add(table);
+
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		mnAsset = new JMenu("Asset");
+		menuBar.add(mnAsset);
+
+		mnitemAssetList = new JMenuItem("Asset List");
+		mnitemAssetList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				assetFrameDisplay(e);
+			}
+		});
+
+		mnAsset.add(mnitemAssetList);
+
 	}
 
 	public void setArgs(String[] args) {
@@ -149,7 +173,7 @@ public class Window extends JFrame {
 			asset.setPrice(Double.parseDouble(txtAssetPrice.getText()));
 			asset.setCreatedDate(new Date());
 			Asset newAss = assetService.saveAsset(asset);
-			rows = new Object[] { newAss.getName(),newAss.getCode(), newAss.getPrice() };
+			rows = new Object[] { newAss.getName(), newAss.getCode(), newAss.getPrice() };
 			mTableModel.addRow(rows);
 		} catch (Exception ex) {
 			log.info(ex.getMessage());
@@ -180,5 +204,18 @@ public class Window extends JFrame {
 		} catch (Exception ex) {
 			log.info(ex.getMessage());
 		}
+	}
+
+	private void assetFrameDisplay(ActionEvent e) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AssetFrame frame = assetFrame;
+					frame.setVisible(true);
+				} catch (Exception e) {
+					log.info(e.getMessage());
+				}
+			}
+		});
 	}
 }
